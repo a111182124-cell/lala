@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { 
-  User, Calendar, Mail, Briefcase, GraduationCap, 
+  User, Calendar, Mail, GraduationCap, 
   Map, Earth, Camera, Sparkles, Languages, Compass, 
   Anchor, Navigation, Skull, Ship, Star, Box, Presentation,
   ArrowUp
