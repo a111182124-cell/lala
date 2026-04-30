@@ -36,24 +36,38 @@ const TimelineItem = ({ span, title, subTitle, desc, icon: Icon, color = "bg-blu
   </div>
 );
 
-const ProjectCard = ({ title, date, desc, icon: Icon, color, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.8 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ type: "spring", delay }}
-    className={`border-4 border-black rounded-3xl p-6 ${color} neo-shadow-lg hover:neo-shadow-hover transition-all duration-300 flex flex-col h-full cursor-pointer hover:-translate-y-2`}
-  >
-    <div className="bg-white border-4 border-black rounded-full w-14 h-14 flex items-center justify-center mb-4 neo-shadow">
-      <Icon className="w-6 h-6" />
-    </div>
-    <span className="bg-white px-3 py-1 rounded-full border-2 border-black font-black text-xs self-start mb-3 neo-shadow">
-      {date}
-    </span>
-    <h3 className="font-black text-xl mb-2 leading-tight">{title}</h3>
-    <p className="font-semibold text-gray-700 text-sm mt-auto">{desc}</p>
-  </motion.div>
-);
+const ProjectCard = ({ title, date, desc, icon: Icon, color, delay, href, children }: any) => {
+  const CardWrapper = href ? motion.a : motion.div;
+  return (
+    <CardWrapper
+      href={href}
+      target={href ? "_blank" : undefined}
+      rel={href ? "noreferrer" : undefined}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ type: "spring", delay }}
+      className={`border-4 border-black rounded-3xl p-6 ${color} neo-shadow-lg hover:neo-shadow-hover transition-all duration-300 flex flex-col h-full block ${href ? 'cursor-pointer hover:-translate-y-2 hover:scale-[1.02]' : 'hover:-translate-y-2'}`}
+    >
+      <div className="flex justify-between items-start mb-4">
+        <div className="bg-white border-4 border-black rounded-full w-14 h-14 flex shrink-0 items-center justify-center neo-shadow">
+          <Icon className="w-6 h-6" />
+        </div>
+        {href && (
+          <span className="bg-white border-2 border-black rounded-full px-3 py-1 text-[10px] sm:text-xs font-black neo-shadow hover:bg-black hover:text-white transition-colors whitespace-nowrap">
+            打開連結 🔗
+          </span>
+        )}
+      </div>
+      <span className="bg-white px-3 py-1 rounded-full border-2 border-black font-black text-xs self-start mb-3 neo-shadow">
+        {date}
+      </span>
+      <h3 className="font-black text-xl mb-3 leading-tight">{title}</h3>
+      {children && <div className="mb-4">{children}</div>}
+      <p className="font-semibold text-gray-700 text-sm mt-auto">{desc}</p>
+    </CardWrapper>
+  );
+};
 
 export default function App() {
   return (
@@ -76,6 +90,7 @@ export default function App() {
               whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
               className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
             >
+              <img src="/avatar.jpg" alt="王柔涵" className="absolute inset-0 w-full h-full object-cover z-20" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
               <Ship className="w-24 h-24 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
               {/* Cute wavy background inside avatar */}
               <motion.div 
@@ -239,45 +254,119 @@ export default function App() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <ProjectCard 
-                title="清明連假企劃 (Manus)" 
+                title="連假企劃 (Word)" 
+                date="3/9 作業" 
+                desc="使用 Word 製作的連假旅遊企劃文件 📝" 
+                icon={Sparkles} 
+                color="bg-[#fef08a]" 
+                delay={0.7}
+                href="https://docs.google.com/document/d/12FPQionX05-ukP9XbpjQY_HqU4PLOh_ygQieE9Hhw-E/edit?tab=t.0"
+              />
+              <ProjectCard 
+                title="連假企劃簡報" 
                 date="3/16 作業" 
+                desc="關於清明連假企劃的簡報展示 📄" 
+                icon={Presentation} 
+                color="bg-[#bae6fd]" 
+                delay={0.75}
+                href="https://docs.google.com/presentation/d/16sTCoq0FCCL2OXZiSALRYRKjwMbKhybN6MmAgpdgg-E/present?slide=id.p3"
+              />
+              <ProjectCard 
+                title="清明連假企劃 (Manus)" 
+                date="3/23 作業" 
                 desc="使用 Manus AI 生成的心靈與傳統完美結合提案簡報 📄" 
                 icon={Presentation} 
                 color="bg-[#fecdd3]" 
-                delay={0.7}
+                delay={0.8}
+                href="https://drive.google.com/file/d/1PjTkaV5l9OJKvsXeNQI_Par9fZUiWfJs/view"
+              />
+              <ProjectCard 
+                title="連假企劃 (Notebook LM)" 
+                date="3/23 作業" 
+                desc="使用 Notebook LM 分析與整理的連假企劃相關資料 💡" 
+                icon={Presentation} 
+                color="bg-[#c4b5fd]" 
+                delay={0.85}
+                href="https://drive.google.com/file/d/1j0yw3cYMCLnWnxSjFOMoSvZCOEOzfoAr/view"
               />
               <ProjectCard 
                 title="清明連假企劃 (Gamma)" 
-                date="新增作業" 
+                date="3/23 作業" 
                 desc="使用 Gamma 生成的黑金質感排版旅遊企劃簡報 🖤" 
                 icon={Presentation} 
                 color="bg-[#fed7aa]" 
-                delay={0.8}
+                delay={0.9}
+                href="https://drive.google.com/file/d/1l5k2B_mbxV2iS8O6iTTHM7LiNuzot7uL/view"
               />
               <ProjectCard 
-                title="連假第一天 Vlog" 
+                title="模擬連假第一天Vlog" 
                 date="3/30 作業" 
                 desc="紀錄清明節連假的歡樂與點點滴滴，充滿活力的影片記錄 🎬" 
                 icon={Camera} 
                 color="bg-[#bfdbfe]" 
-                delay={0.9}
+                delay={1.0}
+                href="https://drive.google.com/file/d/1UFDQz1DT-qx6uNtLpKleiIS59hZh0N3Q/view"
               />
+              <ProjectCard 
+                title="模擬連假第二天Vlog" 
+                date="3/30 作業" 
+                desc="接續第一天的行程，紀錄連假第二天的精彩影片記錄 🎬" 
+                icon={Camera} 
+                color="bg-[#a7f3d0]" 
+                delay={1.1}
+                href="https://drive.google.com/file/d/1Wh95KThMqXCNJv5UbiQMq4HqTSqy9FWD/view"
+              />
+              <ProjectCard 
+                title="模擬連假第三天" 
+                date="3/30 作業" 
+                desc="連假第三天的精彩生活點滴紀錄 🎬" 
+                icon={Camera} 
+                color="bg-[#fbcfe8]" 
+                delay={1.2}
+                href="https://drive.google.com/file/d/158FZ9eHFxa4Q5EkNb2qGEB1P1Hbo31oy/view"
+              />
+              <ProjectCard 
+                title="模擬連假第四天" 
+                date="3/30 作業" 
+                desc="連假第四天的精彩生活點滴紀錄 🎬" 
+                icon={Camera} 
+                color="bg-[#fde68a]" 
+                delay={1.3}
+                href="https://drive.google.com/file/d/1hKJSSohaUAM7iKbsCjbdbg39xWHMxXqt/view"
+              >
+                <div className="w-full aspect-video bg-amber-100 rounded-xl border-[3px] border-black overflow-hidden relative group neo-shadow mb-2">
+                  <img src="/91608.jpg" alt="模擬連假第四天封面" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                </div>
+              </ProjectCard>
               <ProjectCard 
                 title="3D 人物建模生成" 
                 date="4/13 作業" 
-                desc="使用 Tripo 3D AI 工具生成的虛擬可愛角色與模型 👾" 
+                desc="點擊打開專案！使用 Tripo 3D 生成虛擬角色。上圖為真實照片與3D模型的對比 ✨" 
                 icon={Box} 
                 color="bg-[#e9d5ff]" 
-                delay={1.0}
-              />
-              <ProjectCard 
-                title="其他課堂練習" 
-                date="3/9 作業" 
-                desc="資訊作業與課堂的各項基本技能練習成果 💻" 
-                icon={Sparkles} 
-                color="bg-[#fef08a]" 
                 delay={1.1}
-              />
+                href="https://studio.tripo3d.ai/workspace/generate/73602983-c6d0-482c-87e9-a0f52676deae"
+              >
+                <div className="flex gap-2 w-full mb-1 bg-white/50 p-2 rounded-xl border-2 border-black neo-shadow">
+                  <div className="w-1/2 flex flex-col items-center">
+                    <span className="text-[10px] font-black bg-white px-2 py-0.5 rounded-full border-2 border-black mb-1 -mt-4 neo-shadow relative z-10 whitespace-nowrap">真實照片</span>
+                    <div className="w-full aspect-[4/5] bg-sky-100 rounded-lg border-2 border-black flex items-center justify-center overflow-hidden relative group">
+                      <img src="/beach-bear.jpg" alt="海邊拿熊寶" className="absolute inset-0 w-full h-full object-cover z-10" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                      <span className="absolute inset-0 flex flex-col items-center justify-center text-xs text-sky-800 font-black p-2 text-center">
+                        🌅 🏖️<br/>海邊拿熊寶<br/>合照
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-1/2 flex flex-col items-center">
+                    <span className="text-[10px] font-black bg-white px-2 py-0.5 rounded-full border-2 border-black mb-1 -mt-4 neo-shadow relative z-10 whitespace-nowrap">3D 模型</span>
+                    <div className="w-full aspect-[4/5] bg-fuchsia-100 rounded-lg border-2 border-black flex items-center justify-center overflow-hidden relative group">
+                      <span className="absolute inset-0 flex flex-col items-center justify-center text-xs text-fuchsia-800 font-black p-2 text-center">
+                        👾 ✨<br/>可愛3D<br/>人物
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </ProjectCard>
             </div>
           </Card>
           
