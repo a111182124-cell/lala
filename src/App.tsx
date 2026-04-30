@@ -93,7 +93,7 @@ export default function App() {
               whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
               className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
             >
-              <img src={avatarImg} alt="王柔涵" className="absolute inset-0 w-full h-full object-cover z-20" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+              <img src={avatarImg} alt="王柔涵" className="absolute inset-0 w-full h-full object-cover z-20" />
               <Ship className="w-24 h-24 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
               {/* Cute wavy background inside avatar */}
               <motion.div 
@@ -354,7 +354,7 @@ export default function App() {
                   <div className="w-1/2 flex flex-col items-center">
                     <span className="text-[10px] font-black bg-white px-2 py-0.5 rounded-full border-2 border-black mb-1 -mt-4 neo-shadow relative z-10 whitespace-nowrap">真實照片</span>
                     <div className="w-full aspect-[4/5] bg-sky-100 rounded-lg border-2 border-black flex items-center justify-center overflow-hidden relative group">
-                      <img src={beachBearImg} alt="海邊拿熊寶" className="absolute inset-0 w-full h-full object-cover z-10" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                      <img src={beachBearImg} alt="海邊拿熊寶" className="absolute inset-0 w-full h-full object-cover z-10" />
                       <span className="absolute inset-0 flex flex-col items-center justify-center text-xs text-sky-800 font-black p-2 text-center">
                         🌅 🏖️<br/>海邊拿熊寶<br/>合照
                       </span>
