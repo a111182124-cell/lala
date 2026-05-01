@@ -5,11 +5,15 @@
   --font-sans: "M PLUS Rounded 1c", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: #bae6fd; /* powder blue */
+  background-color: #e0f2fe; /* sky-100 */
   background-image: 
-    radial-gradient(#7dd3fc 3px, transparent 3px),
-    radial-gradient(#7dd3fc 3px, transparent 3px);
+    radial-gradient(#bae6fd 3px, transparent 3px),
+    radial-gradient(#bae6fd 3px, transparent 3px);
   background-size: 40px 40px;
   background-position: 0 0, 20px 20px;
   overflow-x: hidden;

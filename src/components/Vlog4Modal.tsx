@@ -1,0 +1,53 @@
+import { motion } from 'motion/react';
+import { X, ExternalLink, Video } from 'lucide-react';
+
+export function Vlog4Modal({ onClose }: { onClose: () => void }) {
+  const driveUrl = "https://drive.google.com/file/d/1hKJSSohaUAM7iKbsCjbdbg39xWHMxXqt/preview";
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="w-full max-w-5xl bg-white border-4 border-black rounded-2xl overflow-hidden shadow-[8px_8px_0_0_rgba(0,0,0,1)] flex flex-col h-[85vh] max-h-[800px]"
+      >
+        <div className="bg-[#fca5a5] border-b-4 border-black p-4 flex justify-between items-center shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="bg-white border-2 border-black p-1.5 rounded-full">
+              <Video className="w-5 h-5 text-black" />
+            </div>
+            <h2 className="font-black text-lg md:text-xl">清明連假第四天 Vlog (3/30 作業)</h2>
+          </div>
+          <div className="flex items-center gap-3">
+            <a 
+              href="https://drive.google.com/file/d/1hKJSSohaUAM7iKbsCjbdbg39xWHMxXqt/view" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="p-2 bg-white border-2 border-black rounded-lg hover:bg-gray-100 transition-colors shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+              title="在新分頁中開啟"
+            >
+              <ExternalLink className="w-4 h-4 hidden md:block" />
+              <span className="text-sm font-bold hidden md:block">新視窗開啟</span>
+              <ExternalLink className="w-5 h-5 md:hidden" />
+            </a>
+            <button 
+              onClick={onClose}
+              className="p-2 bg-white border-2 border-black rounded-lg hover:bg-red-400 hover:text-white transition-colors shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0"
+              title="關閉"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+        <div className="flex-1 w-full relative bg-[#000000]">
+          <iframe 
+            src={driveUrl} 
+            allowFullScreen 
+            className="absolute inset-0 w-full h-full border-0"
+            title="Vlog 第四天影片展示"
+          />
+        </div>
+      </motion.div>
+    </div>
+  );
+}
