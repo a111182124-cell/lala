@@ -135,11 +135,13 @@ export default function App() {
               whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
               className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
             >
-              <div class="container">    
-                  <div id="home" class="section-box">
-                      <div calss="profile-header">
-                          <img src="me.jpg" alt="Profile Avatar" class="profile-img-placeholder">
-                          <div class="profile-info">
+              <img 
+                src="/src/components/me.jpg" 
+                alt="Profile Avatar" 
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+            
             <motion.div 
               animate={{ rotate: [12, -5, 12] }} 
               transition={{ repeat: Infinity, duration: 3 }}
@@ -207,7 +209,7 @@ export default function App() {
               <div className="space-y-5 font-black text-lg">
                 <div className="flex items-center gap-4 bg-white p-4 rounded-xl border-4 border-black neo-shadow hover:-translate-y-1 transition-transform">
                   <Star className="text-pink-500 fill-current w-6 h-6" />
-                  <span>牡羊座 | O型</span>
+                  <span>牡羊座 | B型</span>
                 </div>
                 <div className="flex items-center gap-4 bg-white p-4 rounded-xl border-4 border-black neo-shadow hover:-translate-y-1 transition-transform">
                   <Calendar className="text-blue-500 w-6 h-6" />
