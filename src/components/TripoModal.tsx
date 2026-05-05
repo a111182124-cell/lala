@@ -49,24 +49,56 @@ export function TripoModal({ onClose }: { onClose: () => void }) {
                 <span>真實照片 (對比用)</span>
               </div>
               <div className="flex-1 w-full flex items-center justify-center mt-12 relative">
-                {/* 
-                  Since uploaded images from the chat aren't automatically in the file system,
-                  we expect the user to upload it to AI Studio's file explorer and then we can display it. 
-                  If user uploads to public folder as 'me-photo.jpg' we can use that, otherwise show a placeholder.
-                */}
-                <img 
-                  src="/me-photo.jpg" 
-                  alt="Original provided image" 
-                  className="max-h-full max-w-full object-contain rounded-lg border-2 border-gray-200"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = "https://via.placeholder.com/600x800?text=Please+Upload+Photo+to+public+folder";
+                <div 
+                  className="relative group cursor-pointer w-full h-full flex flex-col items-center justify-center"
+                  onClick={() => document.getElementById('tripo-photo-upload')?.click()}
+                  title="點擊上傳或更換照片"
+                >
+                  <img 
+                    id="tripo-image"
+                    src="/me-photo.jpg" 
+                    alt="Original provided image" 
+                    className="max-h-full max-w-full object-contain rounded-lg border-2 border-gray-200 z-10 block"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if(target.style.display !== 'none') {
+                        target.style.display = 'none';
+                        const placeholder = document.getElementById('tripo-placeholder');
+                        if (placeholder) placeholder.style.display = 'flex';
+                      }
+                    }}
+                    onLoad={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'block';
+                      const placeholder = document.getElementById('tripo-placeholder');
+                      if (placeholder) placeholder.style.display = 'none';
+                    }}
+                  />
+                  <div id="tripo-placeholder" className="absolute inset-0 flex-col items-center justify-center text-gray-500 bg-gray-100 rounded-lg border-2 border-gray-300 border-dashed hidden z-0">
+                    <Upload className="w-12 h-12 mb-3 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                    <p className="font-bold">點擊此處上傳剛剛的全身照</p>
+                    <p className="text-xs mt-2 text-gray-400">也支援拖曳上傳 (開發中)</p>
+                  </div>
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity z-20 rounded-lg">
+                    點擊更換照片
+                  </div>
+                </div>
+                <input 
+                  type="file" 
+                  id="tripo-photo-upload" 
+                  className="hidden" 
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const img = document.getElementById('tripo-image') as HTMLImageElement;
+                      img.src = URL.createObjectURL(file);
+                    }
                   }}
                 />
               </div>
               <div className="mt-4 p-3 bg-blue-50 border-2 border-blue-400 rounded-lg text-sm text-blue-800 font-medium flex items-center gap-2">
-                如果您想在頁面中看到您剛剛上傳的照片，請透過左側檔案總管將圖片上傳到 <code>public</code> 資料夾中，並命名為 <code>me-photo.jpg</code>，我們將更新這裡的顯示。
+                由於瀏覽器安全限制，您可以直接點擊上方圖片區域，將聊天的照片上傳到這裡進行即時比對。
               </div>
             </div>
 

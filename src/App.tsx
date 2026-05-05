@@ -135,16 +135,52 @@ export default function App() {
           <div className="relative group mx-auto md:mx-0">
             <motion.div 
               whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
-              className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
+              className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10 cursor-pointer group"
+              onClick={() => document.getElementById('avatar-upload')?.click()}
+              title="點擊上傳大頭貼"
             >
-              <Ship className="w-24 h-24 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-              {/* Cute wavy background inside avatar */}
-              <motion.div 
-                animate={{ x: [-50, 0, -50] }} 
-                transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
-                className="absolute bottom-0 left-0 w-[200%] h-20 bg-blue-400 opacity-50 rounded-t-[100px]" 
+              <img 
+                id="avatar-image"
+                src="/avatar.jpg" 
+                alt="Avatar" 
+                className="w-full h-full object-cover z-20"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  // Only set to transparent if not already set to prevent infinite loop
+                  if(target.style.opacity !== '0') {
+                    target.style.opacity = '0';
+                  }
+                }}
+                onLoad={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.opacity = '1';
+                }}
               />
+              <div className="absolute inset-0 flex items-center justify-center z-10 opacity-100 peer-loaded:opacity-0 transition-opacity">
+                <Ship className="w-24 h-24 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <motion.div 
+                  animate={{ x: [-50, 0, -50] }} 
+                  transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
+                  className="absolute bottom-0 left-0 w-[200%] h-20 bg-blue-400 opacity-50 rounded-t-[100px]" 
+                />
+              </div>
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity z-30">
+                點擊更換照片
+              </div>
             </motion.div>
+            <input 
+              type="file" 
+              id="avatar-upload" 
+              className="hidden" 
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const img = document.getElementById('avatar-image') as HTMLImageElement;
+                  img.src = URL.createObjectURL(file);
+                }
+              }}
+            />
             
             <motion.div 
               animate={{ rotate: [12, -5, 12] }} 
