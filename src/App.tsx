@@ -135,10 +135,9 @@ export default function App() {
               whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
               className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
             >
-              <img src="me.jpg" alt="Profile Avatar" 
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
+              <img src="me.jpg" alt="Profile Avatar" class="profile-img-placeholder">
+              <div class="profile-info">
+              
             
             <motion.div 
               animate={{ rotate: [12, -5, 12] }} 
