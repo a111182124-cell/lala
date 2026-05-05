@@ -14,7 +14,6 @@ import { VlogModal } from './components/VlogModal';
 import { Vlog2Modal } from './components/Vlog2Modal';
 import { Vlog3Modal } from './components/Vlog3Modal';
 import { Vlog4Modal } from './components/Vlog4Modal';
-import { TripoModal } from './components/TripoModal';
 
 const Card = ({ children, className = '', color = 'bg-white', delay = 0 }) => (
   <motion.div
@@ -85,7 +84,6 @@ export default function App() {
   const [vlog2ModalOpen, setVlog2ModalOpen] = useState(false);
   const [vlog3ModalOpen, setVlog3ModalOpen] = useState(false);
   const [vlog4ModalOpen, setVlog4ModalOpen] = useState(false);
-  const [tripoModalOpen, setTripoModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,52 +133,14 @@ export default function App() {
           <div className="relative group mx-auto md:mx-0">
             <motion.div 
               whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
-              className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10 cursor-pointer group"
-              onClick={() => document.getElementById('avatar-upload')?.click()}
-              title="點擊上傳大頭貼"
+              className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
             >
               <img 
-                id="avatar-image"
-                src="/avatar.jpg" 
-                alt="Avatar" 
-                className="w-full h-full object-cover z-20"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  // Only set to transparent if not already set to prevent infinite loop
-                  if(target.style.opacity !== '0') {
-                    target.style.opacity = '0';
-                  }
-                }}
-                onLoad={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.opacity = '1';
-                }}
+                src="/src/components/me.jpg" 
+                alt="Profile Avatar" 
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 flex items-center justify-center z-10 opacity-100 peer-loaded:opacity-0 transition-opacity">
-                <Ship className="w-24 h-24 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-                <motion.div 
-                  animate={{ x: [-50, 0, -50] }} 
-                  transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
-                  className="absolute bottom-0 left-0 w-[200%] h-20 bg-blue-400 opacity-50 rounded-t-[100px]" 
-                />
-              </div>
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity z-30">
-                點擊更換照片
-              </div>
             </motion.div>
-            <input 
-              type="file" 
-              id="avatar-upload" 
-              className="hidden" 
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const img = document.getElementById('avatar-image') as HTMLImageElement;
-                  img.src = URL.createObjectURL(file);
-                }
-              }}
-            />
             
             <motion.div 
               animate={{ rotate: [12, -5, 12] }} 
@@ -249,7 +209,7 @@ export default function App() {
               <div className="space-y-5 font-black text-lg">
                 <div className="flex items-center gap-4 bg-white p-4 rounded-xl border-4 border-black neo-shadow hover:-translate-y-1 transition-transform">
                   <Star className="text-pink-500 fill-current w-6 h-6" />
-                  <span>牡羊座 | O型</span>
+                  <span>牡羊座 | B型</span>
                 </div>
                 <div className="flex items-center gap-4 bg-white p-4 rounded-xl border-4 border-black neo-shadow hover:-translate-y-1 transition-transform">
                   <Calendar className="text-blue-500 w-6 h-6" />
@@ -427,7 +387,7 @@ export default function App() {
                 icon={Box} 
                 color="bg-[#e9d5ff]" 
                 delay={0.4}
-                onClick={() => setTripoModalOpen(true)}
+                onClick={() => window.open('https://studio.tripo3d.ai/workspace/generate/73602983-c6d0-482c-87e9-a0f52676deae', '_blank', 'noopener,noreferrer')}
               />
               <ProjectCard 
                 title="連假企劃 Word" 
@@ -461,7 +421,7 @@ export default function App() {
       </footer>
 
       {/* BACK TO TOP BUTTON */}
-      {showTopBtn && !docModalOpen && !pptModalOpen && !manusModalOpen && !gammaModalOpen && !vlogModalOpen && !vlog2ModalOpen && !vlog3ModalOpen && !vlog4ModalOpen && !tripoModalOpen && (
+      {showTopBtn && !docModalOpen && !pptModalOpen && !manusModalOpen && !gammaModalOpen && !vlogModalOpen && !vlog2ModalOpen && !vlog3ModalOpen && !vlog4ModalOpen && (
         <button 
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 bg-[#f472b6] text-white p-4 rounded-full border-4 border-black neo-shadow-lg hover:neo-shadow-hover hover:-translate-y-2 transition-all z-50 flex items-center justify-center group"
@@ -494,9 +454,6 @@ export default function App() {
 
       {/* Vlog4 Modal */}
       {vlog4ModalOpen && <Vlog4Modal onClose={() => setVlog4ModalOpen(false)} />}
-
-      {/* Tripo Modal */}
-      {tripoModalOpen && <TripoModal onClose={() => setTripoModalOpen(false)} />}
 
       {/* Keyframes for internal animations not handled by motion directly */}
       <style>{`
