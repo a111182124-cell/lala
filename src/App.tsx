@@ -135,13 +135,11 @@ export default function App() {
               whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
               className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
             >
-              <div class="container">
-                
+              <div class="container">    
                   <div id="home" class="section-box">
                       <div calss="profile-header">
                           <img src="me.jpg" alt="Profile Avatar" class="profile-img-placeholder">
                           <div class="profile-info">
-              
             <motion.div 
               animate={{ rotate: [12, -5, 12] }} 
               transition={{ repeat: Infinity, duration: 3 }}
