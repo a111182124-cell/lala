@@ -136,7 +136,7 @@ export default function App() {
               className="w-48 h-48 md:w-64 md:h-64 bg-[#fde047] border-[6px] border-black rounded-full flex items-center justify-center neo-shadow-lg overflow-hidden relative z-10"
             >
               <img 
-                src="/src/components/me.jpg" 
+                src="/src/components/91609.jpg" 
                 alt="Profile Avatar" 
                 className="w-full h-full object-cover"
               />
